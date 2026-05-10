@@ -39,13 +39,13 @@ class RegisteredUserController extends Controller
             'statut' => 'actif',
         ]);
 
+        Auth::login($user);
+
         try {
             event(new Registered($user));
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             \Log::error("Failed to send registration email: " . $e->getMessage());
         }
-
-        Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
     }

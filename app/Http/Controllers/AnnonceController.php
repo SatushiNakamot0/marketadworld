@@ -108,7 +108,7 @@ class AnnonceController extends Controller
 
         try {
             Mail::to($request->user())->send(new AnnonceSoumise($annonce));
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             \Log::error("Failed to send email: " . $e->getMessage());
         }
 
