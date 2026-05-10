@@ -106,7 +106,11 @@ class AnnonceController extends Controller
             ]);
         }
 
-        Mail::to($request->user())->send(new AnnonceSoumise($annonce));
+        try {
+            Mail::to($request->user())->send(new AnnonceSoumise($annonce));
+        } catch (\Exception $e) {
+            \Log::error("Failed to send email: " . $e->getMessage());
+        }
 
         return redirect()->route('annonces.show', $annonce)->with('success', 'Annonce publiée avec succès, en attente de modération.');
     }
