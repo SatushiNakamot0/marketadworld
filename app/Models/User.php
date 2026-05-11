@@ -11,10 +11,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // Smiya dyal la table exacte f l'MCD
     protected $table = 'utilisateurs';
 
-    // Les colonnes lli ymken n3emrouhom
     protected $fillable = [
         'nom',
         'prenom',
@@ -24,19 +22,17 @@ class User extends Authenticatable
         'statut',
     ];
 
-    // Les colonnes lli makhas'homch ybano
     protected $hidden = [
         'mot_de_passe',
         'remember_token',
     ];
 
-    // Nwerriw l'auth dyal Laravel chno howa l7e9l dyal lmodepasse
+    // Nwerriw l'auth dyal Laravel chno howa l7a9l dyal lmot de passe
     public function getAuthPassword()
     {
         return $this->mot_de_passe;
     }
 
-    // T7wil dyal l'enwé3
     protected function casts(): array
     {
         return [
@@ -45,9 +41,9 @@ class User extends Authenticatable
         ];
     }
 
-    // =========================================================
-    // RELATIONS (L3alaqat)
-    // =========================================================
+    // ========================
+    // RELATIONS
+    // ========================
 
     public function annonces()
     {
@@ -64,9 +60,9 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'id_destinataire');
     }
 
-    // =========================================================
-    // HELPERS (Mosa3adat)
-    // =========================================================
+    // ========================
+    // HELPERS
+    // ========================
 
     public function isAdmin(): bool
     {
